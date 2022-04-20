@@ -1,0 +1,150 @@
+{
+  "login": {
+    "title": "Welcome!",
+    "usernameField": "Username",
+    "passwordField": "Password",
+    "rememberMe": "Remember me...",
+    "buttonLogin": "Login",
+    "registerButton": "Register",
+    "requiredError": "Required field!"
+  },
+  "register": {
+    "title": "Registration request",
+    "nameField": "Name",
+    "lastNameField": "Lastname",
+    "positionField": "Position",
+    "uoField": "Organization Unit",
+    "usernameField": "Username",
+    "roleField": "Role",
+    "emailField": "E-mail",
+    "phoneField": "Phone",
+    "registerButton": "Accept",
+    "requiredError": "Required field!",
+    "mailError": "Enter a valid e-mail address!",
+    "phoneError": "Enter a valid phone number!",
+    "professionalSelect": "Professional",
+    "therapistSelect": "Therapist",
+    "patientSelect": "Patient",
+    "userError": "Username not available, please select another one!!",
+    "registerSuccess": "Registration request of {0} created successfully, please confirm it checking your e-mail {1} inbox!",
+    "titleComplete": "Register complete!",
+    "registerButtonComplete": "Go to Login",
+    "confirmError": "Validation error: User or e-mail is already in use.",
+    "confirmSuscces": "Successful user registration, please check your email."
+  },
+  "restricted": {
+    "title": "Sorry, you are not authorized to access this page.",
+    "button": "Go Home"
+  },
+  "confirm": {
+    "title": "Please, set your user password:",
+    "usernameField": "Username",
+    "requiredError": "Required field!",
+    "passwordField": "Password",
+    "newPasswordField": "Confirm password",
+    "confirmButton": "Accept",
+    "confirmError": "Sorry, something went wrong.",
+    "confirmErrorSubtitle": "Try again later",
+    "passwordsError": "Password must be equals",
+    "confirmPasswordSuccess": "Congrats, password has been set sucessfuly!",
+    "titleComplete": "Password confirmation!",
+    "titleError": "Confirmation Fail!",
+    "confirmButtonComplete": "Go to Login"
+  },
+  "appointment": {
+    "table_description": "Description",
+    "table_createAt": "Created",
+    "table_actionDelete": "Delete"
+  },
+  "appointment_create": {
+    "title": "Create new appointment",
+    "requiredError": "Required field!",
+    "descriptionField": "Description",
+    "addButton": "Add"
+  },
+  "appointment_delete_popconfirm": {
+    "title": "Sure delete?",
+    "okText": "Yes",
+    "cancelText": "No"
+  },
+  "configurations": {
+    "title": "Configurations e-mails:",
+    "mailError": "Enter a valid e-mail address!",
+    "requiredError": "Required field!",
+    "configurationsButton": "Accept",
+    "email_contactField": "Contact e-mail",
+    "email_registerField": "Register e-mail",
+    "email_appointmentField": "Appointment e-mail",
+    "descriptionSuscces": " Configurations e-mails saved",
+    "configurationsSeccesMessage": "Configurations e-mails saved",
+    "configurationsButtonComplete": "Go to Login"
+  },
+  "header": {
+    "title": "We care for your little ones...",
+    "portal": "Go to Portal",
+    "profile": { "name": "Profile", "configuration": "Configuration", "logout": "Logout" }
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "Please fill out the form below to send us an email and we will get back to you as soon as possible.",
+    "field_name": "Name",
+    "field_email": "E-mail",
+    "field_message": "Message",
+    "form_button_send": "Send Message",
+    "info": "Contact Info",
+    "info_address": "Address",
+    "info_phone": "Phone",
+    "info_email": "E-mail",
+    "message_ok": "The message has been sent"
+  },
+  "portal_header": {
+    "title": "Welcome!",
+    "paragraph": "The essence of the idea of founding the Neurodevelopment Center for children has very deep family roots, love for children, compassion, and the vocation to care for those most in need, mark the pillars of our center.",
+    "learnMore": "Learn More"
+  },
+  "portal_navigation": {
+    "features": "Features",
+    "about": "About",
+    "services": "Theraphy",
+    "gallery": "Gallery",
+    "testimonials": "Testimonials",
+    "team": "Teams",
+    "contact": "Contact"
+  },
+  "portal_features": {
+    "f1": {
+      "title": "Therapeutic Network",
+      "description": "We are a model of therapeutic integration, where the patient and his family are the center of our work, we guarantee a 360-degree approach, covering all the aspects and variables that intervene in the neurodevelopment plan of each of our patients, we bring together an effective therapeutic network, where pediatricians, neurologists, orthopedics, audiologists, therapists and social workers intervene,  all working in a fluid interaction that allows the necessary adjustments for an agile and sustainable result."
+    },
+    "f2": {
+      "title": "Neuro-developmental Center for Children",
+      "description": "The Neuro-developmental Center for Children will contribute a forward vision to the future of kids with neurodevelopmental disorders. This effective medical-behavioral care integration is a novel concept of efficacy that reduces therapy times, with a significant impact on the health costs."
+    },
+    "f3": {
+      "title": "Integrated Therapeutic Care",
+      "description": "Examples of neuro-developmental disorders in children include attention-deficit/hyperactivity disorder (ADHD), autism, learning and intellectual disability, conduct disorders, cerebral palsy, and impairments in vision and hearing. Comorbidity is present in these patients, our integrated therapeutic care, and a proactive social service, guarantee an optimal work environment, provide tools to the family, and enhance the result in therapies."
+    },
+    "f4": {
+      "title": "Health Integrated Philosophy",
+      "description": "With a Health Integrated Philosophy as a fundamental principle, our Neuro-developmental Center for Children is a holistic solution to help children with these afflictions while at the same time minimizing health care costs."
+    }
+  },
+  "portal_therapy": {
+    "t1": {
+      "name": "",
+      "text": ""
+    },
+    "t2": {
+      "name": "Physical Therapy",
+      "text": "Pediatric physical therapists (PTs) work with children and their families to assist each child in reaching their maximum potential to function independently and to promote active participation in home, school, and community environments. Physical therapists have expertise in movement, motor development, and body function (e.g., strength and endurance). They apply clinical reasoning during examination, evaluation, diagnosis, and intervention for children, youth, and young adults. PTs also promote health and wellness as they implement a wide variety of supports in collaboration with families, communities, and other medical, educational, developmental, and rehabilitation specialists. The role of pediatric physical therapy is to help children who have difficulty with functional movement, poor balance, and challenges moving through their environment successfully. Some children on the autism spectrum have low muscle tone, some have poor balance, others may not be well-coordinated, and still others may have a combination of all the above. These are all areas that a physical therapist can address."
+    },
+    "t3": {
+      "name": "Occupational Therapy",
+      "text": "Pediatric Occupational Therapy helps children with various types of developmental delays including coordination disorders, sensory integration disorder, autism, attention deficit disorder, dysgraphia, dyslexia, visual impairments and learning difficulties. Our goal is to assist the child, family, and school in maximizing the child's developmental potential and day-to-day success. A child’s role in life is to play and interact with other children. Our pediatric occupational therapists evaluate a child’s current skills related to play, school performance, and daily activities and compare them with what is developmentally appropriate for that age group. OTs help children perform daily activities they may find challenging by addressing sensory, social, behavioral, motor, and environmental issues. Pediatric occupational therapy helps children gain independence while also strengthening the development of fine motor skills, sensory motor skills, and visual motor skills that children need to function and socialize."
+    },
+    "t4": {
+      "name": "Speech Therapy",
+      "text": "Speech–language pathology (SLPs) specializes in the evaluation, diagnosis, and treatment of communication disorders (speech and language impairments), cognitive-communication disorders, voice disorders, and swallowing disorders. SLPs also play an important role in the diagnosis and treatment of autism spectrum disorder (often in a team with pediatricians and psychologists). Approximately 10% of children struggle with a communication disorder. Children who receive speech-language therapy prior to the age of 5 years old have a much higher rate of success than those who begin intervention later. SLPs collaborate with other health care professionals, often working as part of a multidisciplinary team. They can provide information and referrals to audiologists, physicians, dentists, nurses, nurse practitioners, occupational therapists, rehabilitation psychologists, dietitians, educators, behavior consultants (applied behavior analysis) and parents as dictated by the individual client's needs. Research has indicated that children who receive early language intervention are less likely to develop compensatory error patterns later in life."
+    }
+  }
+}

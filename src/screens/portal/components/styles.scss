@@ -1,0 +1,60 @@
+@import '/src/styles/base';
+
+.lang {
+  z-index: 1;
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  display: flex;
+
+  .span-active {
+    color: #fff;
+    background-color: #5ca9fb;
+    background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff);
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    margin-left: 5px;
+    border: 0;
+    text-align: center;
+    border-radius: 50%;
+    transition: all 0.5s linear;
+    text-decoration: none;
+  }
+
+  span {
+    color: white;
+    background-color: #a0a0a0;
+    background-image: linear-gradient(to right, #a0a0a0 0%, #414141);
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    margin-left: 5px;
+    border: 0;
+    text-align: center;
+    border-radius: 50%;
+    transition: all 0.5s linear;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+      background-image: none;
+      background-color: #5ca9fb;
+      cursor: pointer;
+    }
+  }
+}
+
+.profile {
+  position: absolute;
+  top: 8px;
+  right: 63px;
+  // margin-top: 4px !important;
+  // margin-right: 50px !important;
+  .profile-username {
+    margin-left: 10px !important;
+    color: white;
+  }
+}

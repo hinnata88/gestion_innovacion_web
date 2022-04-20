@@ -1,0 +1,30 @@
+@import '/src/styles/base';
+
+.modalForm {
+  padding: 3rem;
+  width: 500px;
+  background-color: white;
+  @include box-shadow(1px 1px 10px greyScale(0.2));
+  margin-bottom: 100px;
+  border-radius: 3px;
+
+  &__title {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+  }
+
+  .forgot {
+    float: right;
+  }
+
+  .action-button {
+    width: 90%;
+    margin: 20px !important;
+  }
+
+  .ant-input-affix-wrapper {
+    font-size: 1.15rem;
+    border-radius: 3px;
+  }
+}

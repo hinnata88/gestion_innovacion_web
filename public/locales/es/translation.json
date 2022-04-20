@@ -1,0 +1,150 @@
+{
+  "login": {
+    "title": "Bienvenido!",
+    "usernameField": "Usuario",
+    "passwordField": "Contraseña",
+    "rememberMe": "Recordar...",
+    "buttonLogin": "Autenticarse",
+    "registerButton": "Registrarse",
+    "requiredError": "Campo requerido!"
+  },
+  "register": {
+    "title": "Solicitud de registro",
+    "nameField": "Nombre",
+    "lastNameField": "Apellidos",
+    "positionField": "Cargo",
+    "uoField": "Unidad Organizativa",
+    "usernameField": "Usuario",
+    "roleField": "Rol del Usuario",
+    "emailField": "Correo electrónico",
+    "phoneField": "Teléfono",
+    "registerButton": "Aceptar",
+    "requiredError": "Campo requerido!",
+    "mailError": "Introduzca un correo electrónica valido!",
+    "phoneError": "Introduzca un número de teléfono valido!",
+    "professionalSelect": "Profesional",
+    "therapistSelect": "Terapista",
+    "patientSelect": "Paciente",
+    "userError": "Usuario no disponible, por favor selecione otro!!",
+    "registerSuccess": "La solicitud de resgistro de  {0} se ha creado satisfactoriamente, por favor revise su correo electrónico {1} para confirmar el acceso!",
+    "titleComplete": "Registro completado!",
+    "registerButtonComplete": "Autenticarse",
+    "confirmError": "Error en validación: El usuario o correo electrónico ya estan en uso.",
+    "confirmSuscces": "Registro de usuario satisfactorio, por favor revise su correo."
+  },
+  "restricted": {
+    "title": "Lo sentimos, no estás autorizado para acceder a esta página.",
+    "button": "Ir a inicio"
+  },
+  "confirm": {
+    "title": "Por favor, establezca su contraseña de usuario:",
+    "usernameField": "Usuario",
+    "requiredError": "Campo requerido!",
+    "passwordField": "Contraseña",
+    "newPasswordField": "Confirmar contraseña",
+    "confirmButton": "Aceptar",
+    "confirmError": "Lo sentimos, algo ha salido mal.",
+    "confirmErrorSubtitle": "Intentelo más tarde",
+    "passwordsError": "Las contraseñas deben ser iguales",
+    "confirmPasswordSuccess": "En hora buena, la contraseña ha sido establecida satisfactoriamente!",
+    "titleComplete": "Confirmación de contraseña!",
+    "titleError": "Confirmación falida!",
+    "confirmButtonComplete": "Autenticarse"
+  },
+  "appointment": {
+    "table_description": "Descripción",
+    "table_createAt": "Creado",
+    "table_actionDelete": "Eliminar"
+  },
+  "appointment_create": {
+    "title": "Crear nueva cita",
+    "requiredError": "Campo requerido",
+    "descriptionField": "Descripción",
+    "addButton": "Adicionar"
+  },
+  "appointment_delete_popconfirm": {
+    "title": "Seguro eliminar?",
+    "okText": "Si",
+    "cancelText": "No"
+  },
+  "configurations": {
+    "title": "Correos electrónicos de configuración:",
+    "mailError": "Introduzca un correo electrónica valido!",
+    "requiredError": "Campo requerido!",
+    "configurationsButton": "Aceptar",
+    "email_contactField": "Correo electrónico de contacto",
+    "email_registerField": "Correo electrónico de registro",
+    "email_appointmentField": "Correo electrónico de citas",
+    "descriptionSuscces": " Correos electrónicos de configuración salvados",
+    "configurationsSeccesMessage": "Correos electrónicos de configuración salvados",
+    "configurationsButtonComplete": "Ir a Autenticación"
+  },
+  "header": {
+    "title": "Velamos por sus pequeños...",
+    "portal": "Ir a Portal",
+    "profile": { "name": "Perfil", "configuration": "Configuración", "logout": "Cerrar sesión" }
+  },
+  "contact": {
+    "title": "Mantengamonos en Contacto",
+    "description": "Complete el siguiente formulario para enviarnos un correo electrónico y nos pondremos en contacto con usted lo antes posible...",
+    "field_name": "Nombre",
+    "field_email": "Correo Electrónico",
+    "field_message": "Mensaje",
+    "form_button_send": "Enviar Mensaje",
+    "info": "Información del Contacto",
+    "info_address": "Dirección",
+    "info_phone": "Teléfono",
+    "info_email": "Correo Electrónico",
+    "message_ok": "El mensaje ha sido enviado correctamente"
+  },
+  "portal_header": {
+    "title": "Bienvenido!",
+    "paragraph": "La esencia de la idea de fundar el Centro de Neurodesarrollo infantil tiene un arraigo familiar muy profundo, el amor por los niños, la compasión y la vocación de cuidar a los más necesitados, marcan los pilares de nuestro centro.",
+    "learnMore": "Información"
+  },
+  "portal_navigation": {
+    "features": "Características",
+    "about": "Acerca de",
+    "services": "Terapias",
+    "gallery": "Galeria",
+    "testimonials": "Testimonios",
+    "team": "Equipo",
+    "contact": "Contacto"
+  },
+  "portal_features": {
+    "f1": {
+      "title": "Red Terapéutica",
+      "description": "Somos un modelo de integración terapéutica, donde el paciente y su familia son el centro de nuestro trabajo, garantizamos un abordaje de 360 ​​grados, abarcando todos los aspectos y variables que intervienen en el plan de neurodesarrollo de cada uno de nuestros pacientes, integramos una red terapéutica eficaz, donde intervienen pediatras, neurólogos, ortopedistas, audiólogos, terapeutas y trabajadores sociales, todos trabajando en una interacción fluida que permite los ajustes necesarios para un resultado ágil y sostenible."
+    },
+    "f2": {
+      "title": "Centro de Neurodesarrollo Infantil",
+      "description": "El Centro de Neurodesarrollo Infantil contribuirá con una visión de futuro al futuro de los niños con trastornos del neurodesarrollo. Esta efectiva integración médico-conductual de la atención es un concepto novedoso de eficacia que reduce los tiempos de terapia, con un impacto significativo en el costos de salud."
+    },
+    "f3": {
+      "title": "Atención Terapéutica Integral",
+      "description": "Ejemplos de trastornos del neurodesarrollo en niños incluyen trastorno por déficit de atención/hiperactividad (TDAH), autismo, discapacidad intelectual y de aprendizaje, trastornos de conducta, parálisis cerebral y deficiencias en la visión y la audición. La comorbilidad está presente en estos pacientes, nuestra atención terapéutica integral, y un servicio social proactivo, garantizan un ambiente de trabajo óptimo, brindan herramientas a la familia y potencian el resultado en las terapias."
+    },
+    "f4": {
+      "title": "Filosofía Integrada",
+      "description": "Con una Filosofía Integrada de la Salud como principio fundamental, nuestro Centro de Desarrollo Neurológico para Niños es una solución holística para ayudar a los niños con estas afecciones y, al mismo tiempo, minimizar los costos de atención médica."
+    }
+  },
+  "portal_therapy": {
+    "t1": {
+      "name": "",
+      "text": ""
+    },
+    "t2": {
+      "name": "Fisioterapia",
+      "text": "Los fisioterapeutas pediátricos (PT) trabajan con los niños y sus familias para ayudar a cada niño a alcanzar su máximo potencial para funcionar de forma independiente y promover la participación activa en el hogar, la escuela y los entornos comunitarios. Los fisioterapeutas tienen experiencia en movimiento, desarrollo motor y función corporal (p. ej., fuerza y ​​resistencia). Aplican el razonamiento clínico durante el examen, la evaluación, el diagnóstico y la intervención para niños, jóvenes y adultos jóvenes. Los PT también promueven la salud y el bienestar al implementar una amplia variedad de apoyos. en colaboración con las familias, las comunidades y otros especialistas médicos, educativos, del desarrollo y de rehabilitación. El papel de la fisioterapia pediátrica es ayudar a los niños que tienen dificultades con el movimiento funcional, falta de equilibrio y desafíos para moverse con éxito en su entorno. Algunos niños en los del espectro autista tienen bajo tono muscular, algunos tienen problemas de equilibrio, otros pueden no estar bien coordinados, un y otros pueden tener una combinación de todo lo anterior. Estas son todas las áreas que un fisioterapeuta puede abordar"
+    },
+    "t3": {
+      "name": "Terapia Ocupacional",
+      "text": "La terapia ocupacional pediátrica ayuda a los niños con varios tipos de retrasos en el desarrollo, incluidos los trastornos de coordinación, el trastorno de integración sensorial, el autismo, el trastorno por déficit de atención, la disgrafía, la dislexia, los impedimentos visuales y las dificultades de aprendizaje. Nuestro objetivo es ayudar al niño, la familia, y la escuela para maximizar el potencial de desarrollo del niño y el éxito diario. El papel de un niño en la vida es jugar e interactuar con otros niños. Nuestros terapeutas ocupacionales pediátricos evalúan las habilidades actuales del niño relacionadas con el juego, el rendimiento escolar y las actividades diarias y compararlos con lo que es apropiado para el desarrollo de ese grupo de edad. Los OT ayudan a los niños a realizar actividades diarias que pueden encontrar desafiantes al abordar problemas sensoriales, sociales, conductuales, motores y ambientales. La terapia ocupacional pediátrica ayuda a los niños a ganar independencia y al mismo tiempo fortalece el desarrollo de los músculos finos. habilidades motoras, habilidades motoras sensoriales y habilidades motoras visuales que los niños necesitan para funcionar y socializar"
+    },
+    "t4": {
+      "name": "Terapia del habla",
+      "text": "La patología del habla y el lenguaje (SLP, por sus siglas en inglés) se especializa en la evaluación, el diagnóstico y el tratamiento de los trastornos de la comunicación (deficiencias del habla y el lenguaje), los trastornos de la comunicación cognitiva, los trastornos de la voz y los trastornos de la deglución. Los SLP también juegan un papel importante en el diagnóstico y tratamiento del trastorno del espectro autista (a menudo en un equipo con pediatras y psicólogos). Aproximadamente el 10% de los niños luchan con un trastorno de la comunicación. Los niños que reciben terapia del habla y el lenguaje antes de los 5 años tienen una tasa mucho más alta de éxito que aquellos que comienzan la intervención más tarde. Los SLP colaboran con otros profesionales de la salud, a menudo trabajando como parte de un equipo multidisciplinario. Pueden proporcionar información y referencias a audiólogos, médicos, dentistas, enfermeras, enfermeras practicantes, terapeutas ocupacionales, psicólogos de rehabilitación, dietistas, educadores, consultores de comportamiento (análisis de comportamiento aplicado) y padres según lo dicte el cliente individual sus necesidades. Las investigaciones han indicado que los niños que reciben una intervención temprana del lenguaje tienen menos probabilidades de desarrollar patrones de errores compensatorios más adelante en la vida"
+    }
+  }
+}

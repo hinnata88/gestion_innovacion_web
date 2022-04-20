@@ -1,0 +1,7 @@
+@function greyScale($amount) {
+  @return rgba(0, 0, 0, $amount);
+}
+
+@function whiteScale($amount) {
+  @return rgba(255, 255, 255, $amount);
+}

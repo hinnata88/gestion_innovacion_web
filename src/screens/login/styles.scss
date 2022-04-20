@@ -1,0 +1,41 @@
+@import '/src/styles/base';
+
+.loginPage {
+  &__mainContainer {
+    // display: flex;
+    height: 100vh !important;
+    justify-content: center;
+    background-color: $color-primary;
+
+    .loginForm {
+      padding: 3rem;
+      height: 280px;
+      width: 400px;
+      background-color: $white;
+
+      @include box-shadow(1px 1px 10px greyScale(0.2));
+      margin-bottom: 100px;
+      border-radius: 3px;
+
+      &__title {
+        font-size: 1.25em;
+        font-weight: 600;
+        margin-bottom: 1em;
+      }
+
+      .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: $green-2;
+        border-color: $green-2;
+      }
+
+      .forgot {
+        float: right;
+      }
+
+      .ant-input-affix-wrapper {
+        font-size: 1.15rem;
+        border-radius: 3px;
+      }
+    }
+  }
+}

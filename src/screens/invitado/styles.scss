@@ -1,0 +1,48 @@
+@import '/src/styles/base';
+
+.registerPage {
+  &__mainContainer {
+    display: flex;
+    height: 100vh !important;
+    justify-content: center;
+    background-color: $color-primary;
+
+    .registerForm {
+      padding: 3rem;
+      width: 500px;
+      background-color: $white;
+      @include box-shadow(1px 1px 10px greyScale(0.2));
+      margin-bottom: 100px;
+      border-radius: 3px;
+
+      &__title {
+        font-size: 1.25em;
+        font-weight: 600;
+        margin-bottom: 0.5em;
+      }
+
+      .forgot {
+        float: right;
+      }
+
+      .login-form-button {
+        width: 100%;
+      }
+
+      .register-form-button {
+        width: 50%;
+        margin-left: 25%;
+      }
+
+      .register {
+        float: right;
+        margin-top: 16px;
+      }
+
+      .ant-input-affix-wrapper {
+        font-size: 1.15rem;
+        border-radius: 3px;
+      }
+    }
+  }
+}

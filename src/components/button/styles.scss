@@ -1,0 +1,43 @@
+@import '/src/styles/base';
+
+.ant-btn-primary {
+  color: white !important;
+  background-color: $primary-button !important;
+  border-color: transparent !important;
+  @include box-shadow(1px 1px 10px greyScale(0.2));
+  margin: 0 10px 0 0 !important;
+
+  width: 100%;
+  &:hover {
+    background-color: $primary-button-hover !important;
+  }
+}
+
+.ant-btn-default {
+  color: white !important;
+  border-color: transparent !important;
+  @include box-shadow(1px 1px 10px greyScale(0.2));
+
+  width: 100%;
+  margin: 5px 0 5px 0 !important;
+  background-color: $secondary-button !important;
+  border-color: $primary-button;
+  border-width: 2px;
+  &:hover {
+    background-color: $secondary-button-hover !important;
+    border: 1 $primary-button-hover;
+  }
+}
+
+.ant-btn-dangerous {
+  color: white !important;
+  background-color: $red-dangerous !important;
+  border-color: transparent !important;
+  @include box-shadow(1px 1px 10px greyScale(0.2));
+
+  width: 100%;
+  margin: 0 10px 0 10px !important;
+  &:hover {
+    background-color: $red-dangerous-hover !important;
+  }
+}
