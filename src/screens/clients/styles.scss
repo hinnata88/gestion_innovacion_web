@@ -1,0 +1,97 @@
+@import '/src/styles/base';
+
+.clientPage {
+  &__mainContainer {
+    // display: flex;
+    height: auto;
+    justify-content: center;
+
+    .clientForm {
+      padding: 3rem;
+      min-height: 70vh;
+      min-width: 80vw;
+      background-color: white;
+      @include box-shadow(1px 1px 10px greyScale(0.2));
+      border-radius: 3px;
+
+      &__title {
+        font-size: 1.25em;
+        font-weight: 600;
+        margin-bottom: 1em;
+      }
+
+      .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: $green-2;
+        border-color: $green-2;
+      }
+
+      .action-button {
+        width: auto !important;
+        margin-bottom: 10px !important;
+      }
+
+      .forgot {
+        float: right;
+      }
+
+      .ant-input-affix-wrapper {
+        font-size: 1.15rem;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+.ant-popover-buttons {
+  .ant-btn-primary {
+    color: white !important;
+    background-color: $red-dangerous !important;
+    border-color: transparent !important;
+    @include box-shadow(1px 1px 10px greyScale(0.2));
+
+    width: 40%;
+    &:hover {
+      background-color: $red-dangerous-hover !important;
+    }
+  }
+
+  .ant-btn-default {
+    color: white !important;
+    border-color: transparent !important;
+    @include box-shadow(1px 1px 10px greyScale(0.2));
+
+    width: 40%;
+    margin-top: 5px;
+    background-color: $green-3 !important;
+    &:hover {
+      background-color: $green-5 !important;
+    }
+  }
+}
+
+.custom-modal {
+  .ant-btn-primary {
+    color: white !important;
+    background-color: $red-dangerous !important;
+    border-color: transparent !important;
+    @include box-shadow(1px 1px 10px greyScale(0.2));
+
+    width: 20%;
+    &:hover {
+      background-color: $red-dangerous-hover !important;
+    }
+  }
+
+  .ant-btn-default {
+    color: white !important;
+    border-color: transparent !important;
+    @include box-shadow(1px 1px 10px greyScale(0.2));
+
+    width: 20%;
+    margin-top: 5px;
+    background-color: $green-3 !important;
+    &:hover {
+      background-color: $green-5 !important;
+    }
+  }
+}

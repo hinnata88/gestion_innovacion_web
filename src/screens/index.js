@@ -12,3 +12,4 @@ export { default as Restricted } from './restricted';
 export { default as Request } from './request';
 export { default as Invitado } from './invitado';
 export { default as Roles } from './roles';
+export { default as Clients } from './clients';

@@ -1,70 +1,63 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Form, Layout, Row, Table } from 'antd';
-import { CheckOutlined, CloseOutlined, CoffeeOutlined, PlusOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { DateTime } from 'luxon';
 
 import * as storage from 'common/storage';
-import useAuth from 'auth/useAuth';
 
-import { CustomPopup, CustomModal, CustomButton } from 'components';
+import { CustomPopup, CustomModal } from 'components';
 import { WrapperPopConfirm } from 'wrappers';
-import { changeProblemStatus, getAllProblemsByUO } from 'api/problemsServices';
+import { getAllClients, deleteClient } from 'api/clientServices';
 
 import AddForm from './add-form/index';
 
 import './styles.scss';
-import { ESTADO_COMUN } from 'common/enums';
 
 const { Content } = Layout;
 
-export const Problems = () => {
+export const Clients = () => {
   const submitButtonRef = useRef();
-  const auth = useAuth();
 
   const [data, setData] = useState([]);
 
-  const loadProblems = async () => {
+  const loadClients = async () => {
     const storageData = storage.getUser();
 
     if (storageData.username) {
-      const userUO = auth.user?.data.user.uo || 0;
-      const responseData = await getAllProblemsByUO(userUO);
-
+      const responseData = await getAllClients();
       const { statusCode, response, message } = responseData;
+
       if (statusCode === 200) setData(response);
       else CustomPopup('error', message);
     }
   };
 
   useEffect(() => {
-    loadProblems();
+    loadClients();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const customTable = () => {
-    const handleDeny = async (key) => {
-      const res = await changeProblemStatus(key, ESTADO_COMUN.DENEGADO);
+    const handleDelete = async (key) => {
+      const res = await deleteClient(key);
       if (res.statusCode === 200) {
-        await loadProblems();
-        CustomPopup('success', 'El problema ha sido denegado');
-      } else CustomPopup('error', res.message);
-    };
-    const handleApprove = async (key) => {
-      const res = await changeProblemStatus(key, ESTADO_COMUN.APROBADO);
-      if (res.statusCode === 200) {
-        await loadProblems();
-        CustomPopup('success', 'El problema ha sido aprobado');
+        await loadClients();
+        CustomPopup('success', 'El cliente ha sido eliminado');
       } else CustomPopup('error', res.message);
     };
 
     const customData =
-      data.map((problem) => {
+      data.map((client) => {
         return {
-          key: problem.id,
-          nombre: problem.nombre,
-          descripcion: problem.descripcion || 'Sin descripción',
-          estado: problem.estado,
-          createdAt: DateTime.fromISO(problem.createdAt).toLocaleString()
+          key: client.id,
+          nombre: client.nombre,
+          tipo: client.uo ? 'Interno' : 'Tercero',
+          uo: client.uo,
+          codigo_uo: client.codigo_uo,
+          codigo_reup: client.codigo_reup,
+          no_contrato: client.no_contrato,
+          organismo: client.organismo,
+          createdAt: DateTime.fromISO(client.createdAt).toLocaleString()
         };
       }) || [];
 
@@ -73,18 +66,46 @@ export const Problems = () => {
         key: 'nombre',
         dataIndex: 'nombre',
         title: 'Nombre',
-        width: '30%'
+        width: '20%'
       },
       {
-        key: 'descripcion',
-        dataIndex: 'descripcion',
-        title: 'Descripción',
-        width: '30%'
+        key: 'tipo',
+        dataIndex: 'tipo',
+        title: 'tipo',
+        width: '10%'
       },
       {
-        key: 'estado',
-        dataIndex: 'estado',
-        title: 'Estado',
+        key: 'uo',
+        dataIndex: 'uo',
+        title: 'Unidad Organizativa',
+        align: 'center',
+        width: '10%'
+      },
+      {
+        key: 'codigo_uo',
+        dataIndex: 'codigo_uo',
+        title: 'Codigo UO',
+        align: 'center',
+        width: '10%'
+      },
+      {
+        key: 'codigo_reup',
+        dataIndex: 'codigo_reup',
+        title: 'REUP',
+        align: 'center',
+        width: '10%'
+      },
+      {
+        key: 'no_contrato',
+        dataIndex: 'no_contrato',
+        title: 'No. Contrato',
+        align: 'center',
+        width: '10%'
+      },
+      {
+        key: 'organismo',
+        dataIndex: 'organismo',
+        title: 'Organismo',
         align: 'center',
         width: '10%'
       },
@@ -104,22 +125,13 @@ export const Problems = () => {
           <>
             <WrapperPopConfirm
               record={record}
-              icon={<CheckOutlined />}
-              messageToShow={'Seguro que desea aprobar el problema'}
-              type="ok"
-              handleFun={handleApprove}
-              toolTipMessage={'Aprobar'}
-            />
-            <WrapperPopConfirm
-              record={record}
               icon={<CloseOutlined />}
-              messageToShow={'Seguro que desea denegar el problema'}
+              messageToShow={'Seguro que desea eliminar el cliente'}
               type="delete"
               danger={true}
-              handleFun={handleDeny}
-              toolTipMessage={'Denegar'}
+              handleFun={handleDelete}
+              toolTipMessage={'Eliminar'}
             />
-            <CustomButton icon={<CoffeeOutlined />} danger={false} handleAction={() => {}} toolTipMessage={'Ideas'} />
           </>
         )
       }
@@ -135,9 +147,9 @@ export const Problems = () => {
   };
 
   const addButton = () => {
-    const modalProperties = { title: 'Crear Problema!', className: 'custom-modal' };
+    const modalProperties = { title: 'Crear Cliente!', className: 'custom-modal' };
     const buttonProperties = {
-      caption: 'Adicionar Problema',
+      caption: 'Adicionar Cliente',
       type: 'primary',
       className: 'action-button',
       icon: <PlusOutlined />
@@ -158,10 +170,10 @@ export const Problems = () => {
   };
 
   return (
-    <Layout className="appointmentsPage">
+    <Layout className="clientPage">
       <Content>
-        <Row align="middle" className="appointmentsPage__mainContainer">
-          <Form name="normal_login" className="appointmentsForm" initialValues={{ remember: true }}>
+        <Row align="middle" className="clientPage__mainContainer">
+          <Form name="normal_login" className="clientForm" initialValues={{ remember: true }}>
             <Row style={{ display: 'flex', flexDirection: 'column' }}>
               {addButton()}
               {customTable()}
@@ -173,4 +185,4 @@ export const Problems = () => {
   );
 };
 
-export default Problems;
+export default Clients;

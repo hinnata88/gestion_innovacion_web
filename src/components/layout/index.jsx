@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Switch, useLocation, Route } from 'react-router-dom';
-import { Request, Problems, Roles, Ideas } from 'screens';
+import { Request, Problems, Roles, Ideas, Clients } from 'screens';
 
 import { Layout, Menu } from 'antd';
 import Header from './header';
@@ -8,7 +8,7 @@ import { PrivateRoute } from 'routers/';
 import useAuth from 'auth/useAuth';
 import { AllowAccessToRequest } from 'common/permisionGate';
 import './styles.scss';
-import { UsergroupAddOutlined, KeyOutlined, ShareAltOutlined, CoffeeOutlined } from '@ant-design/icons';
+import { UsergroupAddOutlined, KeyOutlined, ShareAltOutlined, CoffeeOutlined, IdcardOutlined } from '@ant-design/icons';
 
 const { Content, Sider } = Layout;
 
@@ -29,7 +29,7 @@ const BaseLayout = ({ showPortalLink }) => {
       <Sider className="baseLayout__sider" theme="light" trigger={null}>
         <div className="logo" />
         <Menu>
-          <Menu.Item key="1" className={setActive('problemas') || setActive('')} active icon={<ShareAltOutlined />}>
+          <Menu.Item key="1" className={setActive('problems') || setActive('')} active icon={<ShareAltOutlined />}>
             <NavLink to="/problems">Problemas</NavLink>
           </Menu.Item>
           <Menu.Item key="2" className={setActive('ideas') || setActive('')} active icon={<CoffeeOutlined />}>
@@ -39,11 +39,14 @@ const BaseLayout = ({ showPortalLink }) => {
             <NavLink to="/roles">Roles</NavLink>
           </Menu.Item>
           {AllowAccessToRequest(
-            <Menu.Item key="4" className={setActive('solicitudes')} icon={<UsergroupAddOutlined />}>
+            <Menu.Item key="4" className={setActive('request')} icon={<UsergroupAddOutlined />}>
               <NavLink to="/request">Solicitudes</NavLink>
             </Menu.Item>,
             user
           )}
+          <Menu.Item key="5" className={setActive('clients') || setActive('')} icon={<IdcardOutlined />}>
+            <NavLink to="/clients">Clientes</NavLink>
+          </Menu.Item>
         </Menu>
       </Sider>
     );
@@ -68,6 +71,7 @@ const BaseLayout = ({ showPortalLink }) => {
               <Route exact path="/problems" component={Problems} />
               <Route exact path="/ideas" component={Ideas} />
               <Route exact path="/roles" component={Roles} />
+              <Route exact path="/clients" component={Clients} />
             </Switch>
           </Content>
         </section>
