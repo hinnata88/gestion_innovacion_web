@@ -35,8 +35,8 @@ const AddForm = ({ useData, submitButtonRef }) => {
     const res = await createIdea(nombre, descripcion, userData.id, problema);
     if (res.statusCode === 200) {
       CustomPopup('success', 'Idea creada correctamente');
-      const problems = [...data, res.response];
-      setData(problems);
+      const ideas = [...data, res.response];
+      setData(ideas);
     } else CustomPopup('error', res.message);
 
     form.resetFields();

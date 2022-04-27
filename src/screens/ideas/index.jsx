@@ -71,7 +71,7 @@ export const Ideas = ({ problemId }) => {
           nombre: idea.nombre,
           descripcion: idea.descripcion || 'Sin descripción',
           estado: idea.estado,
-          problema: idea.problema.nombre,
+          problema: idea.problema?.nombre,
           createdAt: DateTime.fromISO(idea.createdAt).toLocaleString()
         };
       }) || [];
