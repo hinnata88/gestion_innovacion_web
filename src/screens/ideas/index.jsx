@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Layout, Row, Table } from 'antd';
-import { CheckOutlined, CloseOutlined, CoffeeOutlined, PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined, PlusOutlined, ShareAltOutlined } from '@ant-design/icons';
 import { DateTime } from 'luxon';
 
 import * as storage from 'common/storage';
@@ -9,7 +9,7 @@ import useAuth from 'auth/useAuth';
 
 import { CustomPopup, CustomModal, CustomButton } from 'components';
 import { WrapperPopConfirm } from 'wrappers';
-import { changeProblemStatus, getAllProblemsByUO } from 'api/problemsServices';
+import { changeIdeaStatus, getAllIdeasByFilter } from 'api/ideasServices';
 
 import AddForm from './add-form/index';
 
@@ -18,55 +18,61 @@ import { ESTADO_COMUN } from 'common/enums';
 
 const { Content } = Layout;
 
-export const Problems = () => {
+export const Ideas = ({ problemId }) => {
   const submitButtonRef = useRef();
   const history = useHistory();
   const auth = useAuth();
+  const userData = auth.user?.data.user;
 
   const [data, setData] = useState([]);
 
-  const loadProblems = async () => {
+  const loadIdeas = async () => {
     const storageData = storage.getUser();
 
     if (storageData.username) {
-      const userUO = auth.user?.data.user.uo || 0;
-      const responseData = await getAllProblemsByUO(userUO);
+      const userUO = userData.uo || 0;
+
+      const responseData = await getAllIdeasByFilter({ id: problemId, uo: userUO });
 
       const { statusCode, response, message } = responseData;
+
+      console.log(response);
+
       if (statusCode === 200) setData(response);
       else CustomPopup('error', message);
     }
   };
 
   useEffect(() => {
-    loadProblems();
+    loadIdeas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const customTable = () => {
     const handleDeny = async (key) => {
-      const res = await changeProblemStatus(key, ESTADO_COMUN.DENEGADO);
+      const res = await changeIdeaStatus(key, ESTADO_COMUN.DENEGADO);
       if (res.statusCode === 200) {
-        await loadProblems();
-        CustomPopup('success', 'El problema ha sido denegado');
+        await loadIdeas();
+        CustomPopup('success', 'La idea ha sido denegada');
       } else CustomPopup('error', res.message);
     };
     const handleApprove = async (key) => {
-      const res = await changeProblemStatus(key, ESTADO_COMUN.APROBADO);
+      const res = await changeIdeaStatus(key, ESTADO_COMUN.APROBADO);
       if (res.statusCode === 200) {
-        await loadProblems();
-        CustomPopup('success', 'El problema ha sido aprobado');
+        await loadIdeas();
+        CustomPopup('success', 'La idea ha sido aprobada');
       } else CustomPopup('error', res.message);
     };
 
     const customData =
-      data.map((problem) => {
+      data.map((idea) => {
         return {
-          key: problem.id,
-          nombre: problem.nombre,
-          descripcion: problem.descripcion || 'Sin descripción',
-          estado: problem.estado,
-          createdAt: DateTime.fromISO(problem.createdAt).toLocaleString()
+          key: idea.id,
+          nombre: idea.nombre,
+          descripcion: idea.descripcion || 'Sin descripción',
+          estado: idea.estado,
+          problema: idea.problema.nombre,
+          createdAt: DateTime.fromISO(idea.createdAt).toLocaleString()
         };
       }) || [];
 
@@ -81,7 +87,14 @@ export const Problems = () => {
         key: 'descripcion',
         dataIndex: 'descripcion',
         title: 'Descripción',
-        width: '30%'
+        width: '20%'
+      },
+      {
+        key: 'problema',
+        dataIndex: 'problema',
+        title: 'Problema',
+        align: 'center',
+        width: '10%'
       },
       {
         key: 'estado',
@@ -104,10 +117,11 @@ export const Problems = () => {
         align: 'center',
         render: (_, record) => (
           <>
+            {}
             <WrapperPopConfirm
               record={record}
               icon={<CheckOutlined />}
-              messageToShow={'Seguro que desea aprobar el problema'}
+              messageToShow={'Seguro que desea aprobar la idea'}
               type="ok"
               handleFun={handleApprove}
               toolTipMessage={'Aprobar'}
@@ -115,13 +129,20 @@ export const Problems = () => {
             <WrapperPopConfirm
               record={record}
               icon={<CloseOutlined />}
-              messageToShow={'Seguro que desea denegar el problema'}
+              messageToShow={'Seguro que desea denegar la idea'}
               type="delete"
               danger={true}
               handleFun={handleDeny}
               toolTipMessage={'Denegar'}
             />
-            <CustomButton icon={<CoffeeOutlined />} danger={false} handleAction={() => {}} toolTipMessage={'Ideas'} />
+            <CustomButton
+              icon={<ShareAltOutlined />}
+              danger={false}
+              handleAction={() => {
+                history.push('/problems');
+              }}
+              toolTipMessage={'Problemas'}
+            />
           </>
         )
       }
@@ -137,9 +158,9 @@ export const Problems = () => {
   };
 
   const addButton = () => {
-    const modalProperties = { title: 'Crear Problema!', className: 'custom-modal' };
+    const modalProperties = { title: 'Crear Idea!', className: 'custom-modal' };
     const buttonProperties = {
-      caption: 'Adicionar Problema',
+      caption: 'Adicionar Idea',
       type: 'primary',
       className: 'action-button',
       icon: <PlusOutlined />
@@ -160,10 +181,10 @@ export const Problems = () => {
   };
 
   return (
-    <Layout className="appointmentsPage">
+    <Layout className="ideasPage">
       <Content>
-        <Row align="middle" className="appointmentsPage__mainContainer">
-          <Form name="normal_login" className="appointmentsForm" initialValues={{ remember: true }}>
+        <Row align="middle" className="ideasPage__mainContainer">
+          <Form name="normal_login" className="ideasForm" initialValues={{ remember: true }}>
             <Row style={{ display: 'flex', flexDirection: 'column' }}>
               {addButton()}
               {customTable()}
@@ -175,4 +196,4 @@ export const Problems = () => {
   );
 };
 
-export default Problems;
+export default Ideas;

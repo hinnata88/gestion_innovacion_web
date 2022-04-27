@@ -1,5 +1,6 @@
 export { default as Login } from './login';
 export { default as Problems } from './problems';
+export { default as Ideas } from './ideas';
 export { default as Register } from './register';
 export { default as Confirm } from './confirm';
 export { default as Portal } from './portal';

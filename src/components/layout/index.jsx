@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Switch, useLocation, Route } from 'react-router-dom';
-import { Request, Problems, Roles } from 'screens';
+import { Request, Problems, Roles, Ideas } from 'screens';
 
 import { Layout, Menu } from 'antd';
 import Header from './header';
@@ -8,7 +8,7 @@ import { PrivateRoute } from 'routers/';
 import useAuth from 'auth/useAuth';
 import { AllowAccessToRequest } from 'common/permisionGate';
 import './styles.scss';
-import { UsergroupAddOutlined, KeyOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { UsergroupAddOutlined, KeyOutlined, ShareAltOutlined, CoffeeOutlined } from '@ant-design/icons';
 
 const { Content, Sider } = Layout;
 
@@ -32,11 +32,14 @@ const BaseLayout = ({ showPortalLink }) => {
           <Menu.Item key="1" className={setActive('problemas') || setActive('')} active icon={<ShareAltOutlined />}>
             <NavLink to="/problems">Problemas</NavLink>
           </Menu.Item>
-          <Menu.Item key="2" className={setActive('roles') || setActive('')} icon={<KeyOutlined />}>
+          <Menu.Item key="2" className={setActive('ideas') || setActive('')} active icon={<CoffeeOutlined />}>
+            <NavLink to="/ideas">Ideas</NavLink>
+          </Menu.Item>
+          <Menu.Item key="3" className={setActive('roles') || setActive('')} icon={<KeyOutlined />}>
             <NavLink to="/roles">Roles</NavLink>
           </Menu.Item>
           {AllowAccessToRequest(
-            <Menu.Item key="3" className={setActive('solicitudes')} icon={<UsergroupAddOutlined />}>
+            <Menu.Item key="4" className={setActive('solicitudes')} icon={<UsergroupAddOutlined />}>
               <NavLink to="/request">Solicitudes</NavLink>
             </Menu.Item>,
             user
@@ -63,6 +66,7 @@ const BaseLayout = ({ showPortalLink }) => {
                 component={Request}
               />
               <Route exact path="/problems" component={Problems} />
+              <Route exact path="/ideas" component={Ideas} />
               <Route exact path="/roles" component={Roles} />
             </Switch>
           </Content>

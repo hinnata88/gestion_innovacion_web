@@ -49,15 +49,6 @@ export const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history, loginUserData]);
 
-  /*useEffect(() => {
-    const localStorageCheck = () => {
-      const data = storage.getUser();
-      storage.setUser(!data ? { username: '', role: '', language: i18n.language } : { ...data, language: i18n.language });
-    };
-
-    localStorageCheck();
-  }, [i18n.language]);*/
-
   const onFinish = async (values) => {
     const { username, password } = values;
     setLoginUserData({ data: null, error: false, loading: true });
