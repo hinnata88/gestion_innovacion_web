@@ -17,6 +17,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
   const [data, setData] = useData;
 
   const [problemsToPick, setProblemsToPick] = useState([]);
+  const [problems, setProblems] = useState([]);
 
   const userData = auth?.user?.data?.user;
 
@@ -24,12 +25,22 @@ const AddForm = ({ useData, submitButtonRef }) => {
     const getProblems = async () => {
       const { statusCode, response, message } = userData?.uo ? await getAllProblemsByUO(userData.uo) : await getAllProblems();
       statusCode === 200 ? setProblemsToPick(response) : CustomPopup('error', `ERROR: ${message}`);
+      console.log("lista " + problemsToPick)      
     };
     getProblems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const add = async (values) => {
+  console.log(problems)
+
+  useEffect(() => {
+    const result = problemsToPick.filter((problem) => problem.estado === "APROBADO")
+    setProblems(result);      
+    }, [problemsToPick]);
+
+ console.log("prueba " + problemsToPick)
+
+  async function add(values) {
     const { nombre, descripcion, problema } = values;
 
     const res = await createIdea(nombre, descripcion, userData.id, problema);
@@ -54,8 +65,8 @@ const AddForm = ({ useData, submitButtonRef }) => {
           <Input />
         </Form.Item>
         <Form.Item label={'Problemas'} name="problema" rules={[{ required: true, message: 'Campo obligatorio' }]}>
-          <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problema">
-            {problemsToPick.map((p) => {
+          <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas">
+            {problems.map((p) => {
               return (
                 <Option key={p.id} value={p.id}>
                   <div className="demo-option-label-item">{p.nombre}</div>

@@ -48,6 +48,8 @@ export const Ideas = ({ problemId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log("prueba" + problemId);
+
   const customTable = () => {
     const handleDeny = async (key) => {
       const res = await changeIdeaStatus(key, ESTADO_COMUN.DENEGADO);
@@ -76,7 +78,7 @@ export const Ideas = ({ problemId }) => {
         };
       }) || [];
 
-    const columnsData = [
+    const columnsData = userData.rolID === 6?[
       {
         key: 'nombre',
         dataIndex: 'nombre',
@@ -146,6 +148,60 @@ export const Ideas = ({ problemId }) => {
           </>
         )
       }
+    ]:
+    [
+      {
+        key: 'nombre',
+        dataIndex: 'nombre',
+        title: 'Nombre',
+        width: '30%'
+      },
+      {
+        key: 'descripcion',
+        dataIndex: 'descripcion',
+        title: 'Descripción',
+        width: '20%'
+      },
+      {
+        key: 'problema',
+        dataIndex: 'problema',
+        title: 'Problema',
+        align: 'center',
+        width: '10%'
+      },
+      {
+        key: 'estado',
+        dataIndex: 'estado',
+        title: 'Estado',
+        align: 'center',
+        width: '10%'
+      },
+      {
+        key: 'createdAt',
+        dataIndex: 'createdAt',
+        title: 'Creado',
+        width: '10%'
+      },
+      {
+        key: 'Options',
+        dataIndex: 'Options',
+        title: 'Opciones',
+        width: '10%',
+        align: 'center',
+        render: (_, record) => (
+          <>
+            {}
+            <CustomButton
+              icon={<ShareAltOutlined />}
+              danger={false}
+              handleAction={() => {
+                history.push('/problems');
+              }}
+              toolTipMessage={'Problemas'}
+            />
+          </>
+        )
+      }
     ];
 
     return (
@@ -169,6 +225,8 @@ export const Ideas = ({ problemId }) => {
     const handleOk = () => {
       submitButtonRef.current.click();
     };
+    
+    console.log(userData);
 
     return (
       <CustomModal
