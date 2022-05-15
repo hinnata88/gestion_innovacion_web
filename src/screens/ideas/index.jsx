@@ -48,8 +48,6 @@ export const Ideas = ({ problemId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("prueba" + problemId);
-
   const customTable = () => {
     const handleDeny = async (key) => {
       const res = await changeIdeaStatus(key, ESTADO_COMUN.DENEGADO);

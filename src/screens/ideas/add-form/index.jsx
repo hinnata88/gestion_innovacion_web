@@ -25,20 +25,16 @@ const AddForm = ({ useData, submitButtonRef }) => {
     const getProblems = async () => {
       const { statusCode, response, message } = userData?.uo ? await getAllProblemsByUO(userData.uo) : await getAllProblems();
       statusCode === 200 ? setProblemsToPick(response) : CustomPopup('error', `ERROR: ${message}`);
-      console.log("lista " + problemsToPick)      
     };
     getProblems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(problems)
-
   useEffect(() => {
-    const result = problemsToPick.filter((problem) => problem.estado === "APROBADO")
-    setProblems(result);      
-    }, [problemsToPick]);
-
- console.log("prueba " + problemsToPick)
+    const result = problemsToPick.filter((problem) => problem.estado === 'APROBADO');
+    setProblems(result);
+  }, [problemsToPick]);
+  
 
   async function add(values) {
     const { nombre, descripcion, problema } = values;
@@ -65,7 +61,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
           <Input />
         </Form.Item>
         <Form.Item label={'Problemas'} name="problema" rules={[{ required: true, message: 'Campo obligatorio' }]}>
-          <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas">
+          <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas" mode="multiple">
             {problems.map((p) => {
               return (
                 <Option key={p.id} value={p.id}>
