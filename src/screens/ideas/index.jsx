@@ -10,6 +10,7 @@ import useAuth from 'auth/useAuth';
 import { CustomPopup, CustomModal, CustomButton } from 'components';
 import { WrapperPopConfirm } from 'wrappers';
 import { changeIdeaStatus, getAllIdeasByFilter } from 'api/ideasServices';
+import { getAllProblemsByIDIdea } from 'api/problemsServices';
 
 import AddForm from './add-form/index';
 
@@ -31,10 +32,14 @@ export const Ideas = ({ problemId }) => {
 
     if (storageData.username) {
       const userUO = userData.uo || 0;
+      const responseDataIdea = await getAllIdeasByFilter({ id: problemId, uo: userUO });
+      for(let i = 0; i <= responseDataIdea.length ; i++){
+        let problems = await getAllProblemsByIDIdea({id: responseDataIdea[i].id})    
+        const {response} = problems;
+        console.log('lista de problemas por id de idea'+ response.data)
+      }
 
-      const responseData = await getAllIdeasByFilter({ id: problemId, uo: userUO });
-
-      const { statusCode, response, message } = responseData;
+      const { statusCode, response, message } = responseDataIdea;
 
       console.log(response);
 
@@ -67,11 +72,11 @@ export const Ideas = ({ problemId }) => {
     const customData =
       data.map((idea) => {
         return {
-          key: idea.id,
+          id: idea.id,
           nombre: idea.nombre,
           descripcion: idea.descripcion || 'Sin descripción',
           estado: idea.estado,
-          problema: idea.problema?.nombre,
+          problema: idea.problemas.nombre,
           createdAt: DateTime.fromISO(idea.createdAt).toLocaleString()
         };
       }) || [];
@@ -81,13 +86,13 @@ export const Ideas = ({ problemId }) => {
         key: 'nombre',
         dataIndex: 'nombre',
         title: 'Nombre',
-        width: '30%'
+        width: '20%'
       },
       {
         key: 'descripcion',
         dataIndex: 'descripcion',
         title: 'Descripción',
-        width: '20%'
+        width: '30%'
       },
       {
         key: 'problema',
@@ -152,13 +157,13 @@ export const Ideas = ({ problemId }) => {
         key: 'nombre',
         dataIndex: 'nombre',
         title: 'Nombre',
-        width: '30%'
+        width: '20%'
       },
       {
         key: 'descripcion',
         dataIndex: 'descripcion',
         title: 'Descripción',
-        width: '20%'
+        width: '30%'
       },
       {
         key: 'problema',

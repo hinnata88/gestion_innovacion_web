@@ -1,7 +1,10 @@
+/* eslint-disable no-undef */
 import React, { useState } from 'react';
 import { Form, Switch, Button, Input, Select } from 'antd';
 
 import { createClient } from 'api/clientServices';
+//import { validate } from 'class-validator';
+//import { CreateItemDto } from "./CreateItemDto";
 // import { getAllProblemsByUO, getAllProblems } from 'api/problemsServices';
 
 import { CustomPopup } from 'components';
@@ -27,6 +30,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
   // const auth = useAuth();
   const [data, setData] = useData;
   const [form] = Form.useForm();
+  
 
   const [internClient, setInternClient] = useState(false);
 
@@ -47,6 +51,8 @@ const AddForm = ({ useData, submitButtonRef }) => {
     form.resetFields();
   };
 
+  const letras = new RegExp("^[a-zA-Z ]{4,40}$");
+
   const InternClient = () => {
     return (
       <>
@@ -61,8 +67,24 @@ const AddForm = ({ useData, submitButtonRef }) => {
             })}
           </Select>
         </Form.Item>
-        <Form.Item label={'Código'} name="codigo_uo" rules={[{ required: true, message: 'Campo obligatorio' }]}>
-          <Input />
+        <Form.Item label={'Código'} name="codigo_uo" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacío'
+          },
+          {
+            pattern: /[0-9]{3}/,
+            message: 'El campo solo debe tener números y un tamaño de 3 caracteres'
+          }
+          ]}
+          hasFeedback
+        >
+          <Input/>
         </Form.Item>
       </>
     );
@@ -71,13 +93,63 @@ const AddForm = ({ useData, submitButtonRef }) => {
   const ExternClient = () => {
     return (
       <>
-        <Form.Item label={'Codigo REUP'} name="codigo_reup" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+        <Form.Item label={'Codigo REUP'} name="codigo_reup" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            pattern: /[0-9]{5}/,
+            message: 'El campo solo debe tener números y un tamaño de 5 caracteres'
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacío'
+          }          
+          ]}
+          hasFeedback
+        >
           <Input />
         </Form.Item>
-        <Form.Item label={'Número de Contrato'} name="no_contrato" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+        <Form.Item label={'Número de Contrato'} name="no_contrato" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacío'
+          },
+          {
+            pattern: /[a-zA-Z0-9]{15}/,
+            message: 'El campo solo debe tener letras, números y un tamaño de 15 caracteres'
+          }
+          ]}
+          hasFeedback
+        >
           <Input />
         </Form.Item>
-        <Form.Item label={'Organismo'} name="organismo" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+        <Form.Item label={'Organismo'} name="organismo" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacío'
+          },
+          {
+            validator: (_, value) =>
+            value && letras.test(value)
+            ? Promise.resolve()
+            : Promise.reject("El campo solo debe tener letras")
+          }
+          ]}
+          hasFeedback
+        >
           <Input />
         </Form.Item>
       </>
@@ -90,7 +162,25 @@ const AddForm = ({ useData, submitButtonRef }) => {
 
   return (
     <Form {...layout} form={form} onFinish={add} size={'default'}>
-      <Form.Item label={'Nombre'} name="nombre" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+      <Form.Item label={'Nombre'} name="nombre" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacio'
+          },
+          {
+            validator: (_, value) =>
+            value && letras.test(value)
+            ? Promise.resolve()
+            : Promise.reject("El campo solo debe tener letras")
+          }
+          ]}
+          hasFeedback
+          >
         <Input />
       </Form.Item>
       <Form.Item label={`Tipo de Cliente:`}>

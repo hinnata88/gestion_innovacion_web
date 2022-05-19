@@ -44,6 +44,17 @@ export const getAllProblemsByUO = async (uo) => {
   }
 };
 
+export const getAllProblemsByIDIdea = async (id) => {
+  try {
+    const endpoint = `/problems/idea?id=${id}`;
+    const { data } = await getAxios().get(endpoint);
+    console.log(data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const changeProblemStatus = async (id, estado) => {
   try {
     const endpoint = `/problem-status/?id=${id}&estado=${estado}`;

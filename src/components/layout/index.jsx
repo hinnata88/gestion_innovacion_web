@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavLink, Switch, useLocation, Route } from 'react-router-dom';
-import { Request, Problems, Roles, Ideas, Clients } from 'screens';
+import { Request, Projects,  Problems, Roles, Ideas, Clients, Gastos } from 'screens';
 
 import { Layout, Menu } from 'antd';
 import Header from './header';
@@ -28,23 +28,26 @@ const BaseLayout = ({ showPortalLink }) => {
     return (
       <Sider className="baseLayout__sider" theme="light" trigger={null}>
         <div className="logo" />
-        <Menu>
+        <Menu>        
           <Menu.Item key="1" className={setActive('problems') || setActive('')} active icon={<ShareAltOutlined />}>
             <NavLink to="/problems">Problemas</NavLink>
           </Menu.Item>
           <Menu.Item key="2" className={setActive('ideas') || setActive('')} active icon={<CoffeeOutlined />}>
             <NavLink to="/ideas">Ideas</NavLink>
           </Menu.Item>
-          <Menu.Item key="3" className={setActive('roles') || setActive('')} icon={<KeyOutlined />}>
+          <Menu.Item key="3" className={setActive('projects') || setActive('')} active icon={<ShareAltOutlined />}>
+            <NavLink to="/projects">Proyectos</NavLink>
+          </Menu.Item>
+          <Menu.Item key="4" className={setActive('roles') || setActive('')} icon={<KeyOutlined />}>
             <NavLink to="/roles">Roles</NavLink>
           </Menu.Item>
           {AllowAccessToRequest(
-            <Menu.Item key="4" className={setActive('request')} icon={<UsergroupAddOutlined />}>
+            <Menu.Item key="5" className={setActive('request')} icon={<UsergroupAddOutlined />}>
               <NavLink to="/request">Solicitudes</NavLink>
             </Menu.Item>,
             user
           )}
-          <Menu.Item key="5" className={setActive('clients') || setActive('')} icon={<IdcardOutlined />}>
+          <Menu.Item key="6" className={setActive('clients') || setActive('')} icon={<IdcardOutlined />}>
             <NavLink to="/clients">Clientes</NavLink>
           </Menu.Item>
         </Menu>
@@ -68,10 +71,12 @@ const BaseLayout = ({ showPortalLink }) => {
                 path="/request"
                 component={Request}
               />
+              <Route exact path="/projects" component={Projects} />
               <Route exact path="/problems" component={Problems} />
               <Route exact path="/ideas" component={Ideas} />
               <Route exact path="/roles" component={Roles} />
               <Route exact path="/clients" component={Clients} />
+              <Route exact path="/gastos" component={Gastos} />
             </Switch>
           </Content>
         </section>

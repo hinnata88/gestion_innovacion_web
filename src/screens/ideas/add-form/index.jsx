@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Row, Button, Input, Select } from 'antd';
+import { Form, Row, Button, Input, Select} from 'antd';
 
 import { createIdea } from 'api/ideasServices';
 import { getAllProblemsByUO, getAllProblems } from 'api/problemsServices';
@@ -37,30 +37,70 @@ const AddForm = ({ useData, submitButtonRef }) => {
   
 
   async function add(values) {
-    const { nombre, descripcion, problema } = values;
+    if(values?.id !== undefined || values?.id !== null){
+      const { nombre, descripcion, id } = values;
 
-    const res = await createIdea(nombre, descripcion, userData.id, problema);
+    const res = await createIdea(nombre, descripcion, userData.id, id);
     if (res.statusCode === 200) {
       CustomPopup('success', 'Idea creada correctamente');
       const ideas = [...data, res.response];
+      console.log( "idea " + data);
       setData(ideas);
     } else CustomPopup('error', res.message);
-
+    }  
+    else CustomPopup('error', 'No se ha podido crear la idea');  
     form.resetFields();
-  };
+  }  
 
   const [form] = Form.useForm();
+  const letras = new RegExp("^[a-zA-Z ]{4,40}$");
 
   return (
     <Form form={form} name="problem_form" className="problemForm" onFinish={add} initialValues={{ description: null }}>
       <Row style={{ display: 'flex', flexDirection: 'column' }}>
-        <Form.Item label={'Nombre'} name="nombre" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+        <Form.Item label={'Nombre'} name="nombre" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacío'
+          },
+          {
+            validator: (_, value) =>
+            value && letras.test(value)
+            ? Promise.resolve()
+            : Promise.reject("El campo solo debe tener letras")
+          }
+          ]}
+          hasFeedbackrules={[{ required: true, message: 'Campo obligatorio' }]}
+        >
           <Input />
         </Form.Item>
-        <Form.Item label={'Descripción'} name="descripcion" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+        <Form.Item label={'Descripción'} name="descripcion" 
+        rules={[
+          { 
+          required: true, 
+          message: 'Campo obligatorio' 
+          },
+          {
+            whitespace: true,
+            message: 'El campo no puede estar vacío'
+          },
+          {
+            validator: (_, value) =>
+            value && letras.test(value)
+            ? Promise.resolve()
+            : Promise.reject("El campo solo debe tener letras")
+          }
+          ]}
+          hasFeedback
+        >
           <Input />
         </Form.Item>
-        <Form.Item label={'Problemas'} name="problema" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+        <Form.Item label={'Problemas'} name="id" rules={[{ required: true, message: 'Campo obligatorio' }]}>
           <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas" mode="multiple">
             {problems.map((p) => {
               return (
