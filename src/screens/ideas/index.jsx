@@ -10,7 +10,6 @@ import useAuth from 'auth/useAuth';
 import { CustomPopup, CustomModal, CustomButton } from 'components';
 import { WrapperPopConfirm } from 'wrappers';
 import { changeIdeaStatus, getAllIdeasByFilter } from 'api/ideasServices';
-import { getAllProblemsByIDIdea } from 'api/problemsServices';
 
 import AddForm from './add-form/index';
 
