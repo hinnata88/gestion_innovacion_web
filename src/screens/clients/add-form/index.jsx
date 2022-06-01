@@ -79,7 +79,11 @@ const AddForm = ({ useData, submitButtonRef }) => {
           },
           {
             pattern: /[0-9]{3}/,
-            message: 'El campo solo debe tener números y un tamaño de 3 caracteres'
+            message: 'El campo solo debe tener números'
+          },
+          {
+            max: 3,
+            message: 'El campo solo debe tener un tamaño de 3 caracteres'
           }
           ]}
           hasFeedback
@@ -101,12 +105,16 @@ const AddForm = ({ useData, submitButtonRef }) => {
           },
           {
             pattern: /[0-9]{5}/,
-            message: 'El campo solo debe tener números y un tamaño de 5 caracteres'
+            message: 'El campo solo debe tener números'
           },
           {
             whitespace: true,
             message: 'El campo no puede estar vacío'
-          }          
+          },
+          {
+            max: 5,
+            message: 'El campo solo debe tener un tamaño de 5 caracteres'
+          }         
           ]}
           hasFeedback
         >
@@ -124,7 +132,11 @@ const AddForm = ({ useData, submitButtonRef }) => {
           },
           {
             pattern: /[a-zA-Z0-9]{15}/,
-            message: 'El campo solo debe tener letras, números y un tamaño de 15 caracteres'
+            message: 'El campo solo debe tener letras y números'
+          },
+          {
+            max: 15,
+            message: 'El campo solo debe tener un tamaño de 15 caracteres'
           }
           ]}
           hasFeedback

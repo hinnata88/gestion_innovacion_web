@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Layout, Row, Table } from 'antd';
 import { CheckOutlined, CloseOutlined, PlusOutlined, ShareAltOutlined } from '@ant-design/icons';
@@ -31,14 +31,8 @@ export const Ideas = ({ problemId }) => {
 
     if (storageData.username) {
       const userUO = userData.uo || 0;
-      const responseDataIdea = await getAllIdeasByFilter({ id: problemId, uo: userUO });
-      for(let i = 0; i <= responseDataIdea.length ; i++){
-        let problems = await getAllProblemsByIDIdea({id: responseDataIdea[i].id})    
-        const {response} = problems;
-        console.log('lista de problemas por id de idea'+ response.data)
-      }
-
-      const { statusCode, response, message } = responseDataIdea;
+      const responseData = await getAllIdeasByFilter({ id: problemId, uo: userUO });
+      const { statusCode, response, message } = responseData;
 
       console.log(response);
 
@@ -46,11 +40,11 @@ export const Ideas = ({ problemId }) => {
       else CustomPopup('error', message);
     }
   };
-
+  
   useEffect(() => {
     loadIdeas();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
 
   const customTable = () => {
     const handleDeny = async (key) => {
@@ -75,10 +69,10 @@ export const Ideas = ({ problemId }) => {
           nombre: idea.nombre,
           descripcion: idea.descripcion || 'Sin descripción',
           estado: idea.estado,
-          problema: idea.problemas.nombre,
+          problema: idea.problemas.map((p) => p.nombre + " " ),
           createdAt: DateTime.fromISO(idea.createdAt).toLocaleString()
         };
-      }) || [];
+      }) || []; 
 
     const columnsData = userData.rolID === 6?[
       {
@@ -227,8 +221,6 @@ export const Ideas = ({ problemId }) => {
     const handleOk = () => {
       submitButtonRef.current.click();
     };
-    
-    console.log(userData);
 
     return (
       <CustomModal

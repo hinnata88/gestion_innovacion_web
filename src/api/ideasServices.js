@@ -1,12 +1,12 @@
 import { getAxios } from 'utils/axios';
 
-export const createIdea = async (nombre, descripcion, idUsuario, id) => {
+export const createIdea = async (nombre, descripcion, problema, idUsuario, id) => {
   const endpoint = `/idea/create`;
   const problem = {
     nombre: nombre,
     descripcion: descripcion,
-    userId: idUsuario,
-    id : id
+    id: problema,
+    userId: idUsuario
   };
 
   const { data } = await getAxios().post(endpoint, problem);

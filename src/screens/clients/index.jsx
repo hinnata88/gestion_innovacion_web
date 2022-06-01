@@ -66,7 +66,10 @@ export const Clients = () => {
         key: 'nombre',
         dataIndex: 'nombre',
         title: 'Nombre',
-        width: '20%'
+        width: '20%',
+        onFilter: (value, record) => record.nombre.indexOf(value) === 0,
+        sorter: (a, b) => a.nombre.localeCompare(b.nombre),
+        sortDirections: ['descend', 'ascend']
       },
       {
         key: 'tipo',

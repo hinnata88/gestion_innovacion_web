@@ -11,6 +11,7 @@ import '../styles.scss';
 const AddForm = ({ useData, submitButtonRef }) => {
   const auth = useAuth();
   const [data, setData] = useData;
+  const {TextArea} = Input;
 
   const add = async (values) => {
     const { nombre, descripcion } = values;
@@ -35,7 +36,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
           <Input />
         </Form.Item>
         <Form.Item label={'Descripción'} name="descripcion" rules={[{ required: true, message: 'Campo obligatorio' }]}>
-          <Input />
+        <TextArea rows={4} maxLength={200} />
         </Form.Item>
       </Row>
       <Form.Item>

@@ -3,6 +3,7 @@ import { Form, Row, Button, Input, Select} from 'antd';
 
 import { createIdea } from 'api/ideasServices';
 import { getAllProblemsByUO, getAllProblems } from 'api/problemsServices';
+//import { getAllIdeas, getAllIdeasByFilter } from 'api/ideasServices';
 
 import { CustomPopup } from 'components';
 import useAuth from 'auth/useAuth';
@@ -15,6 +16,8 @@ const { Option } = Select;
 const AddForm = ({ useData, submitButtonRef }) => {
   const auth = useAuth();
   const [data, setData] = useData;
+
+  const {TextArea} = Input;
 
   const [problemsToPick, setProblemsToPick] = useState([]);
   const [problems, setProblems] = useState([]);
@@ -38,26 +41,46 @@ const AddForm = ({ useData, submitButtonRef }) => {
 
   async function add(values) {
     if(values?.id !== undefined || values?.id !== null){
-      const { nombre, descripcion, id } = values;
+      const { nombre, descripcion, problema, id } = values;
 
-    const res = await createIdea(nombre, descripcion, userData.id, id);
+    const res = await createIdea(nombre, descripcion, problema, userData.id, id);
     if (res.statusCode === 200) {
       CustomPopup('success', 'Idea creada correctamente');
-      const ideas = [...data, res.response];
-      console.log( "idea " + data);
-      setData(ideas);
+      const ideas = res.response;
+      const idea = {          
+            id: ideas.createdIdea.id,
+            nombre: ideas.createdIdea.nombre,
+            descripcion: ideas.createdIdea.descripcion || 'Sin descripción',
+            estado: ideas.createdIdea.estado,
+            problemas: ideas.problems.map((p) => p.nombre + " " ),
+            createdAt: ideas.createdIdea.createdAt
+        };
+      const final = [...data, idea];
+      setData(final);
+      
     } else CustomPopup('error', res.message);
     }  
     else CustomPopup('error', 'No se ha podido crear la idea');  
     form.resetFields();
-  }  
+  };
 
   const [form] = Form.useForm();
-  const letras = new RegExp("^[a-zA-Z ]{4,40}$");
+  const letras = new RegExp("^[a-zA-Z ]{4,200}$");
 
   return (
     <Form form={form} name="problem_form" className="problemForm" onFinish={add} initialValues={{ description: null }}>
       <Row style={{ display: 'flex', flexDirection: 'column' }}>
+      <Form.Item label={'Problemas'} name="problema" rules={[{ required: true, message: 'Campo obligatorio' }]}>
+          <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas" mode="multiple">
+            {problems.map((p) => {
+              return (
+                <Option key={p.id} value={p.id}>
+                  <div className="demo-option-label-item">{p.nombre}</div>
+                </Option>
+              );
+            })}
+          </Select>
+        </Form.Item>
         <Form.Item label={'Nombre'} name="nombre" 
         rules={[
           { 
@@ -75,7 +98,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
             : Promise.reject("El campo solo debe tener letras")
           }
           ]}
-          hasFeedbackrules={[{ required: true, message: 'Campo obligatorio' }]}
+          hasFeedbackrules
         >
           <Input />
         </Form.Item>
@@ -98,19 +121,8 @@ const AddForm = ({ useData, submitButtonRef }) => {
           ]}
           hasFeedback
         >
-          <Input />
-        </Form.Item>
-        <Form.Item label={'Problemas'} name="id" rules={[{ required: true, message: 'Campo obligatorio' }]}>
-          <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas" mode="multiple">
-            {problems.map((p) => {
-              return (
-                <Option key={p.id} value={p.id}>
-                  <div className="demo-option-label-item">{p.nombre}</div>
-                </Option>
-              );
-            })}
-          </Select>
-        </Form.Item>
+        <TextArea rows={4} maxLength={200} />
+        </Form.Item>        
       </Row>
       <Form.Item>
         <Button ref={submitButtonRef} type="hidden" htmlType="submit" style={{ display: 'none' }} />
