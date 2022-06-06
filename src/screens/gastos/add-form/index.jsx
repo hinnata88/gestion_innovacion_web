@@ -13,7 +13,7 @@ import { UserAddOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 const AddForm = ({ useData, submitButtonRef }) => {
-  const [data, setData] = useData;
+  const [setDataG] = useData;
   const auth = useAuth();
   const [problems, setProblems] = useState([]);
   const userData = auth?.user?.data?.user;
@@ -47,8 +47,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
           elemento: gastos.elemento,
           ejecutado: gastos.ejecutado
     };
-      const final = [...data, gasto];
-      setData(final);
+      setDataG(gasto);
     } else CustomPopup('error', res.message);
 
     form.resetFields();

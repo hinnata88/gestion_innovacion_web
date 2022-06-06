@@ -8,7 +8,7 @@ import { CustomPopup } from 'components';
 import '../styles.scss';
 
 const AddArgument = ({useData, proyect, submitButtonRefOtro }) => {
-  const [dataArgument, setDataArgument] = useState();
+  const [setDataArgument] = useState();
   //const [data, setData] = useData;
   const {TextArea} = Input;
   const newDate = new Date();
@@ -23,6 +23,8 @@ const AddArgument = ({useData, proyect, submitButtonRefOtro }) => {
     if (res.statusCode === 200) {
       CustomPopup('success', 'Argumento creado correctamente');
       const justificacionFinal = res.response;
+      if(justificacionFinal.estado !== "PENDIENTE")
+      CustomPopup('success', "El cambio en el presupuesto fue aprobado")
       //let final = [...dataArgument, justificacionFinal]
       /*let presupuesto = proyect[0].presupuesto_aprobado;
       for(let j = 0; j < data.length; ++j){
@@ -30,8 +32,8 @@ const AddArgument = ({useData, proyect, submitButtonRefOtro }) => {
           data[j].totalAprobado = presupuesto + justificacionFinal.montoSolicitado
           setData(data);
           return false;
-        }
-        else CustomPopup('error', "El cambio en el presupuesto no fue aprobado");*/
+        }*/
+        else CustomPopup('error', "El cambio en el presupuesto no fue aprobado");
         setDataArgument(justificacionFinal);
       } 
       else CustomPopup('error', res.message);

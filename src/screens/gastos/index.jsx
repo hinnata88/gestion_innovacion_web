@@ -19,6 +19,8 @@ export const Gastos = () => {
   const submitButtonRef = useRef();
   //const auth = useAuth();
   const [data, setData] = useState([]);
+  const [datag, setDataG] = useState([]);
+  const datap = [];
   
   const loadGastos = async () => {
     const storageData = storage.getUser();
@@ -27,7 +29,9 @@ export const Gastos = () => {
       const responseData = await getAllBudget();
 
       const { statusCode, response, message } = responseData;
-      if (statusCode === 200) setData(response);
+      if (statusCode === 200){
+        setData(response)        
+      }
       else CustomPopup('error', message);
     }
   };
@@ -38,26 +42,27 @@ export const Gastos = () => {
   }, []);
 
   const expandedRowRender = () => {
+
     const columnsD = [
       {
         key: 'elemento',
         dataIndex: 'elemento',
         title: 'Elemento Gastos',
         fixed: 'left',
-        width: 110
+        width: 310
       },
-      { title: 'Ene', dataIndex: 'mes', key: 1 },
-      { title: 'Feb', dataIndex: 'mes', key: 2 },
-      { title: 'Mar', dataIndex: 'mes', key: 3 },
-      { title: 'Abr', dataIndex: 'mes', key: 4 },
-      { title: 'May', dataIndex: 'mes', key: 5 },
-      { title: 'Jun', dataIndex: 'mes', key: 6 },
-      { title: 'Jul', dataIndex: 'mes', key: 7 },
-      { title: 'Ago', dataIndex: 'mes', key: 8 },
-      { title: 'Sep', dataIndex: 'mes', key: 9 },
-      { title: 'Oct', dataIndex: 'mes', key: 10 },
-      { title: 'Nov', dataIndex: 'mes', key: 11 },
-      { title: 'Dic', dataIndex: 'mes', key: 12 },
+      { title: 'Ene', dataIndex: 'ene', key: 1 },
+      { title: 'Feb', dataIndex: 'feb', key: 2 },
+      { title: 'Mar', dataIndex: 'mar', key: 3 },
+      { title: 'Abr', dataIndex: 'abr', key: 4 },
+      { title: 'May', dataIndex: 'may', key: 5 },
+      { title: 'Jun', dataIndex: 'jun', key: 6 },
+      { title: 'Jul', dataIndex: 'jul', key: 7 },
+      { title: 'Ago', dataIndex: 'ago', key: 8 },
+      { title: 'Sep', dataIndex: 'sep', key: 9 },
+      { title: 'Oct', dataIndex: 'oct', key: 10 },
+      { title: 'Nov', dataIndex: 'nov', key: 11 },
+      { title: 'Dic', dataIndex: 'dic', key: 12 },
       {
         key: 'total',
         dataIndex: 'total',
@@ -70,58 +75,67 @@ export const Gastos = () => {
           </>
         )
       }
-    ];
-
-    const datap = [];
-
-    for (let i = 1; i < 13; ++i) {
-      for(let j = 0; j < data.length; ++j){
-        if(data[j].mes === columnsD[i].key){
+    ];  
+    
+    for (let i = 0; i < data.length; ++i) {
+      for(let j = 1; j < 13; ++j){
+        if(data[i].mes === columnsD[j].key){
           datap.push({
-            elemento: data[j].elemento,
-            mes: data[j].ejecutado,
+            elemento: data[i].elemento,
+            [columnsD[j].dataIndex]: data[i].ejecutado,
           });
       }      
       }      
-    }
+    }     
 
     return (
       <Table 
       columns={columnsD}   
       dataSource={datap} 
+      scroll={{
+        x: 1500,
+        y: 300,
+      }}
       pagination={false} />
     )     
   };
 
   const customTable = () => {  
     const d = [];
+    if(datag.length > 0){
     for(let i = 0; i < data.length; ++i){
-      if(data.length !== 1){
-        for(let j = 0; j < data.length; ++j){
-          if(data[j].id !== data[i].id )
+      if(data.length > 0 && data[i].id !== datag.key){
           d.push({
-            key: data[i].id,
-            codigo: "12345",
+            id: data[i].id,
+            codigo: i+1,
             proyecto: "Prueba"
           })
         }
-      }
       else{
         d.push({
-          key: data[i].id,
-          codigo: "12345",
+          id: data[i].id,
+          codigo: i+1,
           proyecto: "Prueba"
         })
       } 
+    }}
+    else{
+      for(let i = 0; i < data.length; ++i){
+        d.push({
+          key: data[i].id,
+          codigo: i+1,
+          proyecto: "Prueba"
+        })
+      }
     }
     
-    const customData =
+    const customData =    
       d.map((gasto) => 
       {
         return {
           key: gasto.id,
           codigo: gasto.codigo,
-          proyecto: gasto.nombre,
+          proyecto: gasto.proyecto,
         };
       }) || [];
 
@@ -131,13 +145,15 @@ export const Gastos = () => {
         dataIndex: 'codigo',
         title: 'Código',
         align: 'center',
-        width: '70%'
+        fixed: 'left',
+        width: 100
       },
       {
         key: 'proyecto',
         dataIndex: 'proyecto',
-        title: 'Proyecto',      
-        width: '70%'
+        title: 'Proyecto', 
+        fixed: 'right',     
+        width: 100
       }      
     ];
 
@@ -149,7 +165,9 @@ export const Gastos = () => {
         expandable={{
           expandedRowRender
         }}
-        scroll={{columnsData, x: 130, y: 1800}} 
+        scroll={{
+          x: 500
+        }} 
         pagination={{ defaultPageSize: 5, showSizeChanger: false, pageSizeOptions: ['10', '20', '30'] }}
       />
     );
@@ -173,7 +191,7 @@ export const Gastos = () => {
         className="components-table-demo-nested"
         modalProperties={modalProperties}
         buttonProperties={buttonProperties}
-        component={<AddForm useData={[data, setData]} submitButtonRef={submitButtonRef} />}
+        component={<AddForm useData={[datag, setDataG]} submitButtonRef={submitButtonRef} />}
         handleOK={handleOk}
       />
     );
