@@ -14,6 +14,7 @@ import AddForm from './add-form/index';
 import './styles.scss';
 
 const { Content } = Layout;
+//const { Text } = Typography;
 
 export const Gastos = () => {
   const submitButtonRef = useRef();
@@ -21,6 +22,7 @@ export const Gastos = () => {
   const [data, setData] = useState([]);
   const [datag, setDataG] = useState([]);
   const datap = [];
+  const d = [];
   
   const loadGastos = async () => {
     const storageData = storage.getUser();
@@ -42,6 +44,8 @@ export const Gastos = () => {
   }, []);
 
   const expandedRowRender = () => {
+    
+    let totalP = 0;
 
     const columnsD = [
       {
@@ -69,27 +73,62 @@ export const Gastos = () => {
         title: 'Total',
         fixed: 'right',
         width: 100,
-        align: 'center',
-        render: (_, record) => (
-          <>            
-          </>
-        )
+        align: 'center'
       }
     ];  
     
-    for (let i = 0; i < data.length; ++i) {
-      for(let j = 1; j < 13; ++j){
-        if(data[i].mes === columnsD[j].key){
-          datap.push({
-            elemento: data[i].elemento,
-            [columnsD[j].dataIndex]: data[i].ejecutado,
-          });
-      }      
-      }      
+    if(datag.length > 0){
+      for (let i = 0; i < datag.length; ++i) {
+        for(let j = 1; j < 13; ++j){
+          if(datag[i].mes === columnsD[j].key){
+            totalP += datag[i].ejecutado
+            datap.push({
+              key: datag[i].key,
+              elemento: datag[i].elemento,
+              [columnsD[j].dataIndex]: datag[i].ejecutado,
+              total: totalP
+            });
+        }      
+        }      
+      }
+    }
+    else if(datap.length > 0){
+      for (let i = 0; i < datap.length; ++i) {
+        for(let r = 0; r < data.length; ++r){
+          if(datap[i].id !== data[r].key){
+            for(let j = 1; j < 13; ++j){
+              if(data[i].mes === columnsD[j].key){
+                totalP += datap[j].ejecutado
+                datap.push({
+                  key: data[i].id,
+                  elemento: data[i].elemento,
+                  [columnsD[j].dataIndex]: data[i].ejecutado,
+                  total: totalP
+                });
+            }      
+            }
+          }
+        }              
+      }
+    } 
+    else {
+      for(let i = 0; i < data.length; ++i){
+          for(let j = 1; j < 13; ++j){
+            if(data[i].mes === columnsD[j].key){
+              totalP = data[i].ejecutado
+              datap.push({
+                key: data[i].id,
+                elemento: data[i].elemento,
+                [columnsD[j].dataIndex]: data[i].ejecutado,
+                total: totalP
+              });
+          }      
+          }
+      }
     }     
 
     return (
-      <Table 
+    <Table 
       columns={columnsD}   
       dataSource={datap} 
       scroll={{
@@ -100,30 +139,46 @@ export const Gastos = () => {
     )     
   };
 
-  const customTable = () => {  
-    const d = [];
+  const customTable = () => {
     if(datag.length > 0){
     for(let i = 0; i < data.length; ++i){
       if(data.length > 0 && data[i].id !== datag.key){
           d.push({
-            id: data[i].id,
-            codigo: i+1,
+            id: i,
+            codigo: 1+i,
             proyecto: "Prueba"
           })
         }
       else{
         d.push({
-          id: data[i].id,
-          codigo: i+1,
+          id: i,
+          codigo: 1+i,
           proyecto: "Prueba"
         })
       } 
     }}
+    else if(d.length > 0){
+      for(let i = 0; i < data.length; ++i){
+        if(data.length > 0 && data[i].id !== d.id){
+            d.push({
+              id: i,
+              codigo: 1+i,
+              proyecto: "Prueba"
+            })
+          }
+        else{
+          d.push({
+            id: i,
+            codigo: 1+i,
+            proyecto: "Prueba"
+          })
+        } 
+      }}
     else{
       for(let i = 0; i < data.length; ++i){
         d.push({
-          key: data[i].id,
-          codigo: i+1,
+          id: i,
+          codigo: 1+i,
           proyecto: "Prueba"
         })
       }
@@ -159,8 +214,7 @@ export const Gastos = () => {
 
     return (
       <Table
-        className="components-table-demo-nested"
-        dataSource={customData}
+        className="components-table-demo-nested"        
         columns={columnsData}
         expandable={{
           expandedRowRender
@@ -168,6 +222,7 @@ export const Gastos = () => {
         scroll={{
           x: 500
         }} 
+        dataSource={customData}
         pagination={{ defaultPageSize: 5, showSizeChanger: false, pageSizeOptions: ['10', '20', '30'] }}
       />
     );
