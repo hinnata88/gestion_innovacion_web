@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, Layout, Row, Table } from 'antd';
 import { CheckOutlined, CloseOutlined, CoffeeOutlined, PlusOutlined } from '@ant-design/icons';
 import { DateTime } from 'luxon';
@@ -19,6 +20,7 @@ const { Content } = Layout;
 
 export const Problems = () => {
   const submitButtonRef = useRef();
+  const history = useHistory();
   const auth = useAuth();
 
   const [data, setData] = useState([]);
@@ -119,7 +121,9 @@ export const Problems = () => {
               handleFun={handleDeny}
               toolTipMessage={'Denegar'}
             />
-            <CustomButton icon={<CoffeeOutlined />} danger={false} handleAction={() => {}} toolTipMessage={'Ideas'} />
+            <CustomButton icon={<CoffeeOutlined />} danger={false} handleAction={() => {
+                history.push('/ideas');
+              }} toolTipMessage={'Ideas'} />
           </>
         )
       }
