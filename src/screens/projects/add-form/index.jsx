@@ -10,6 +10,7 @@ import useAuth from 'auth/useAuth';
 
 import '../styles.scss';
 import { UserAddOutlined } from '@ant-design/icons';
+import { LETRAS } from 'common/regularExpression';
 
 const { Option } = Select;
 
@@ -56,7 +57,6 @@ const AddForm = ({ problemId, useData, submitButtonRef }) => {
   }, []);
 
   const [form] = Form.useForm();
-  const letras = new RegExp("^[a-zA-Z ]{4,200}$");
 
   return (
     <Form form={form} name="problem_form" className="problemForm"  onFinish={add} initialValues={{ description: null }}>
@@ -96,7 +96,7 @@ const AddForm = ({ problemId, useData, submitButtonRef }) => {
           },
           {
             validator: (_, value) =>
-            value && letras.test(value)
+            value && LETRAS.test(value)
             ? Promise.resolve()
             : Promise.reject("El campo solo debe tener letras")
           }
@@ -117,7 +117,7 @@ const AddForm = ({ problemId, useData, submitButtonRef }) => {
           },
           {
             validator: (_, value) =>
-            value && letras.test(value)
+            value && LETRAS.test(value)
             ? Promise.resolve()
             : Promise.reject("El campo solo debe tener letras")
           }

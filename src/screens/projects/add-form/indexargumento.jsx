@@ -6,6 +6,7 @@ import { createJustification } from 'api/justificationServices';
 import { CustomPopup } from 'components';
 
 import '../styles.scss';
+import { LETRAS } from 'common/regularExpression';
 
 const AddArgument = ({useData, proyect, submitButtonRefOtro }) => {
   const [setDataArgument] = useState();
@@ -41,7 +42,6 @@ const AddArgument = ({useData, proyect, submitButtonRefOtro }) => {
   };
 
   const [form] = Form.useForm();
-  const letras = new RegExp("^[a-zA-Z ]{4,200}$");
 
   return (
     <Form form={form} name="justificacion_form" className="projectForm" onFinish={add} initialValues={{ description: null }}>
@@ -79,7 +79,7 @@ const AddArgument = ({useData, proyect, submitButtonRefOtro }) => {
             },
             {
               validator: (_, value) =>
-              value && letras.test(value)
+              value && LETRAS.test(value)
               ? Promise.resolve()
               : Promise.reject("El campo solo debe tener letras")
             }

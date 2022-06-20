@@ -8,6 +8,7 @@ import { createClient } from 'api/clientServices';
 // import { getAllProblemsByUO, getAllProblems } from 'api/problemsServices';
 
 import { CustomPopup } from 'components';
+import { LETRAS } from 'common/regularExpression';
 // import useAuth from 'auth/useAuth';
 
 import { unidadOrganizativa } from 'data/mookData';
@@ -50,8 +51,6 @@ const AddForm = ({ useData, submitButtonRef }) => {
 
     form.resetFields();
   };
-
-  const letras = new RegExp("^[a-zA-Z ]{4,40}$");
 
   const InternClient = () => {
     return (
@@ -155,7 +154,7 @@ const AddForm = ({ useData, submitButtonRef }) => {
           },
           {
             validator: (_, value) =>
-            value && letras.test(value)
+            value && LETRAS.test(value)
             ? Promise.resolve()
             : Promise.reject("El campo solo debe tener letras")
           }
