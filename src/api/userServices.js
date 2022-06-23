@@ -44,18 +44,19 @@ export const confirmUser = async (token) => {
 };
 
 export const getUsers = async () => {
-  // try {
-  //   const localStorageData = storage.getUser();
-  //   axios.defaults.headers.common['Content-Type'] = 'application/json';
-  //   axios.defaults.headers.common['Accept-Language'] = localStorageData?.language || 'en';
-  //   //axios.defaults.headers.common['access-token'] = token;
-  //   // const endpoint = `${url}/users`;
-  //   // const data = await axios.get(endpoint);
-  //   const data = usuarios;
-  //   return data;
-  // } catch (error) {
-  //   throw error;
-  // }
+   try {
+    const endpoint = '/users'
+     //const localStorageData = Storage.getUser();
+     //getAxios().defaults.headers.common['Content-Type'] = 'application/json';
+     //getAxios().defaults.headers.common['Accept-Language'] = localStorageData?.language || 'en';
+     //axios.defaults.headers.common['access-token'] = token;
+      //const endpoint = `${url}/users`;
+      const {data} = await getAxios().get(endpoint);
+     //const data = usuarios;
+     return data;
+   } catch (error) {
+     throw error;
+   }
 };
 
 export const getUserById = async (id) => {

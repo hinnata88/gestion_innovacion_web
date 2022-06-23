@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Row, Button, Input, Select } from 'antd';
 
 import { createProyect } from 'api/projectServices';
-import { getAllClients } from 'api/clientServices';
+import { getUsers } from 'api/userServices';
 import { getAllIdeasByFilter, getAllIdeas } from 'api/ideasServices';
 
 import { CustomPopup } from 'components';
@@ -19,7 +19,8 @@ const AddForm = ({ problemId, useData, submitButtonRef }) => {
   const [data, setData] = useData;
   const {TextArea} = Input;
 
-  const [clients, setClients] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState([]);
   const [ideasToPick, setIdeasToPick] = useState([]);
 
   const userData = auth?.user?.data?.user;
@@ -48,13 +49,18 @@ const AddForm = ({ problemId, useData, submitButtonRef }) => {
   }, []);
 
   useEffect(() => {
-    const getClients = async () => {
-      const { statusCode, response, message } = await getAllClients();
-      statusCode === 200 ? setClients(response) : CustomPopup('error', `ERROR: ${message}`);
+    const getAllUsers = async () => {
+      const { statusCode, response, message } = await getUsers();
+      statusCode === 200 ? setUsers(response) : CustomPopup('error', `ERROR: ${message}`);
     };
-    getClients();
+    getAllUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const result = users.filter((u) => u.rolId === 7);
+    setUser(result);
+  }, [users]);
 
   const [form] = Form.useForm();
 
@@ -128,10 +134,10 @@ const AddForm = ({ problemId, useData, submitButtonRef }) => {
         </Form.Item>
         <Form.Item label={'Especialistas'} name="especialistas" rules={[{ required: true, message: 'Campo obligatorio' }]}>
           <Select prefix={<UserAddOutlined className="site-form-item-icon" />} placeholder="Escoger problemas" mode='multiple'>
-            {clients.map((c) => {
+            {user.map((c) => {
               return (
                 <Option key={c.id} value={c.id}>
-                  <div className="demo-option-label-item">{c.nombre}</div>
+                  <div className="demo-option-label-item">{c.persona.nombre}</div>
                 </Option>
               );
             })}
